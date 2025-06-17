@@ -60,12 +60,12 @@ document.querySelector('.js-product-grid')
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button_element) => {
     button_element.addEventListener('click', () => {
-      const productId =button_element.dataset.productId;
+      const productId = button_element.dataset.productId;
 
       let matchingItem;
 
       cart.forEach((item)=>{
-        if(producId === item.productId){
+        if(productId === item.productId){
           matchingItem = item;
         }
       });
@@ -79,8 +79,13 @@ document.querySelectorAll('.js-add-to-cart')
         });
       }
 
-      
-      console.log(cart);
+      let cartQuantity=0;
+      cart.forEach((item)=>{
+        cartQuantity += item.quantity;
+      });
+
+      document.querySelector('.js-cart-quantity').innerHTML=cartQuantity
+
     });
 });
 //List of all add to cart buttons on the page given by the querySelectorAll
