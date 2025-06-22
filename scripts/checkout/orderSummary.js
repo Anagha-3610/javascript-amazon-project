@@ -4,14 +4,9 @@ import { formatCurrency } from '../utils/money.js';
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
 import  dayjs  from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.js';
+import { renderPaymentSummary } from './paymentSummary.js';
+
 //why we removed the curly braces=> default export when we want to export only one thing from the file=> export default Function_Name; at the end of the file.
-
-hello();
-const today = dayjs();
-
-const deliverydate = today.add(7,'days');
-
-console.log(deliverydate.format('dddd, MMMM D'));
 
 
 export function renderOrderSummary(){
@@ -135,6 +130,8 @@ export function renderOrderSummary(){
           `.js-cart-item-container-${productId}`);
         container.remove();
         // to remove the HTML of the removed element remove is used.
+
+        renderPaymentSummary();
       });
     });
 
@@ -144,6 +141,8 @@ export function renderOrderSummary(){
       const {productId,deliveryOptionsId} = element.dataset;
       updateDeliveryOptId(productId,deliveryOptionsId);
       renderOrderSummary();
+
+      renderPaymentSummary();
     });
   });
 }
