@@ -1,12 +1,13 @@
 class Cart{
   cartItems;
-  localStorageKey;
+  #localStorageKey;
+  //to make it private
   constructor(localStorageKey){
-    this.localStorageKey=localStorageKey;
-    this.loadFromStorage();
+    this.#localStorageKey=localStorageKey;
+    this.#loadFromStorage();
   }
-  loadFromStorage(){
-      this.cartItems=JSON.parse(localStorage.getItem(this.localStorageKey));
+  #loadFromStorage(){
+      this.cartItems=JSON.parse(localStorage.getItem(this.#localStorageKey));
       // parse used to convert the string back to a list
 
       if(!this.cartItems){
