@@ -1,8 +1,12 @@
-function Cart(localStorageKey) {
-  const cart={
-    cartItems: undefined,
-    loadFromStorage(){
-      this.cartItems=JSON.parse(localStorage.getItem(localStorageKey));
+class Cart{
+  cartItems;
+  localStorageKey;
+  constructor(localStorageKey){
+    this.localStorageKey=localStorageKey;
+    this.loadFromStorage();
+  }
+  loadFromStorage(){
+      this.cartItems=JSON.parse(localStorage.getItem(this.localStorageKey));
       // parse used to convert the string back to a list
 
       if(!this.cartItems){
@@ -16,13 +20,11 @@ function Cart(localStorageKey) {
         deliveryOptionsId:'2'
       }];
       }
-    },
-
-    saveToStorage(){
-      localStorage.setItem(localStorageKey,JSON.stringify(this.cartItems))
-    },
-
-    addToCart(productId){
+    }
+  saveToStorage(){
+      localStorage.setItem(this.localStorageKey,JSON.stringify(this.cartItems))
+    }
+  addToCart(productId){
       let matchingItem;
 
       this.cartItems.forEach((cartItem)=>{
@@ -41,9 +43,8 @@ function Cart(localStorageKey) {
         });
       }
       this.saveToStorage();
-    },
-
-    removeFromCart(productId){
+    }
+  removeFromCart(productId){
       const newCart=[];
       this.cartItems.forEach((cartItem)=>{
         if(cartItem.productId !== productId){
@@ -53,9 +54,8 @@ function Cart(localStorageKey) {
 
       this.cartItems=newCart;
       this.saveToStorage();
-    },
-
-    updateDeliveryOptId(productId,deliveryOptionsId){
+    }
+  updateDeliveryOptId(productId,deliveryOptionsId){
       let matchingItem;
 
       this.cartItems.forEach((cartItem)=>{
@@ -68,19 +68,16 @@ function Cart(localStorageKey) {
 
       this.saveToStorage();
     }
-
-  };
-  return cart;
 }
 
-const cart=Cart('cart-oop');
-const businessCart=Cart('cart-business');
 
-cart.loadFromStorage();
-cart.addToCart('3fdfe8d6-9a15-4979-b459-585b0d0545b9');
-businessCart.loadFromStorage();
+const cart=new Cart('cart-oop');
+const businessCart=new Cart('cart-business');
+
 
 console.log(cart);
 console.log(businessCart);
 
-// Organizes code into objects(tries to represent the real world)
+console.log(businessCart instanceof Cart);
+
+//Helps to generate these objects(object generator)
