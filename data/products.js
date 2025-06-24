@@ -54,10 +54,12 @@ class Clothing extends Product{
   }
   // Method overriding: replace the parent's method with a new one.
 }
-console.log(tshirt);
-console.log(tshirt.getPrice());
 
-
+/*
+const date = new Date();
+console.log(date);
+console.log(date.toLocaleTimeString());
+*/
 
 export const products = [
   {
@@ -731,3 +733,6 @@ export const products = [
 // Product array was converted to a product class.
 // We can create a for some product a new clothing class.
 // Discriminator property: which class we should convert a product into.
+
+
+//Arrow functions do not change the value of "this".
