@@ -5,7 +5,7 @@ import formatCurrency from './utils/money.js';
 let productsHTML = '';
 
 products.forEach((product)=>{
-  productsHTML= productsHTML + 
+  productsHTML= productsHTML +
         `<div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -42,6 +42,10 @@ products.forEach((product)=>{
               <option value="10">10</option>
             </select>
           </div>
+          
+          ${product.extraInfoHTML()}
+          <!-- Polymorphism = use a method without knowing the class of the object. -->
+          
 
           <div class="product-spacer"></div>
 

@@ -29,9 +29,35 @@ class Product {
     return `images/ratings/rating-${this.rating.stars * 10}.png`;
   }
   getPrice(){
-    return `${formatCurrency(this.priceCents)}`;
+    return `$${formatCurrency(this.priceCents)}`;
   }
+
+  extraInfoHTML(){
+    return '';
+  }
+
 }
+
+class Clothing extends Product{
+  sizeChartLink;
+  constructor(productDetails){
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+    // To call the constructor of the parent class.
+  }
+  extraInfoHTML(){
+    super.extraInfoHTML();
+    // to call the method in the parent class.
+    return `
+      <a href="${this.sizeChartLink}">Size Chart</a>
+    `;
+  }
+  // Method overriding: replace the parent's method with a new one.
+}
+console.log(tshirt);
+console.log(tshirt.getPrice());
+
+
 
 export const products = [
   {
@@ -693,6 +719,15 @@ export const products = [
     ]
   }
 ].map((productDetails) => {
+  if(productDetails.type==='clothing')
+  {
+    return new Clothing(productDetails);
+  }
   return new Product(productDetails);
 });
 
+
+
+// Product array was converted to a product class.
+// We can create a for some product a new clothing class.
+// Discriminator property: which class we should convert a product into.
