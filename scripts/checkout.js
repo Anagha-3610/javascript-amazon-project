@@ -7,20 +7,27 @@ import { loadCart } from '../data/cart.js';
 //import '../data/backend-practice.js';
 
 async function loadPage() {
+  try{
 
+    // throw 'error1'
 
-  await loadProductsFetch();
+    await loadProductsFetch();
 
-  await new Promise((resolve) =>{
-    loadCart(()=>{
-      resolve();
+    const value = await new Promise((resolve, reject) =>{
+      // throw 'error2'
+      loadCart(()=>{
+        //reject('error3') // reject creates a error in the future.
+        resolve('value3');
+      });
     });
-  });
+  } catch(error){
+    console.log('Unexpected error: Try again later');
+  }
 
     renderOrderSummary();
     renderPaymentSummary();
 
-  return 'value2'// to return a like done with resolve here return is used.
+  // return 'value2'// to return a like done with resolve here return is used. 
 }
 //Async makes a function return a promise. 
 loadPage();
