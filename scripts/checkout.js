@@ -6,6 +6,26 @@ import { loadCart } from '../data/cart.js';
 //import '../data/cart-class.js'
 //import '../data/backend-practice.js';
 
+async function loadPage() {
+
+
+  await loadProductsFetch();
+
+  await new Promise((resolve) =>{
+    loadCart(()=>{
+      resolve();
+    });
+  });
+
+    renderOrderSummary();
+    renderPaymentSummary();
+
+  return 'value2'// to return a like done with resolve here return is used.
+}
+//Async makes a function return a promise. 
+loadPage();
+
+/*
 Promise.all([
   loadProductsFetch(),
   new Promise((resolve) =>{
@@ -14,11 +34,13 @@ Promise.all([
     });
   })
 
-]).then((values)=>{
+]).then((values) => {
   console.log(values)
   renderOrderSummary();
   renderPaymentSummary();
 })
+*/
+
 /*
 new Promise((resolve) => {
   loadProducts(() => {
