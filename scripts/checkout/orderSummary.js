@@ -16,8 +16,11 @@ export function renderOrderSummary(){
 
     const productId=cartItem.productId;
 
-    const matchingProduct =getProduct(productId);
-    
+    const matchingProduct = getProduct(productId);
+    if (!matchingProduct) {
+      console.log(`Product not found for productId: ${productId}`);
+      return; // Skip this cart item if product is undefined
+    }
 
     const deliveryOptionId = cartItem.deliveryOptionsId;
 
@@ -33,8 +36,9 @@ export function renderOrderSummary(){
 
 
     summaryHTML+= `
-    <div class="cart-item-container 
-    js-cart-item-container-${matchingProduct.id}">
+    <div class="cart-item-container
+        js-cart-item-container
+        js-cart-item-container-${matchingProduct.id}">
       <div class="delivery-date">
         Delivery date: ${dateString}
       </div>
@@ -146,6 +150,5 @@ export function renderOrderSummary(){
     });
   });
 }
-
 
 renderOrderSummary();
