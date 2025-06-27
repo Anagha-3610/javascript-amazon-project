@@ -73,3 +73,19 @@ export function updateDeliveryOptId(productId,deliveryOptionsId){  let matchingI
   saveToStorage();
 }
 //To know: 1. Product, 2. Delivery Option that has been chosen
+
+export function loadCart(fun) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load', () => {
+    console.log(xhr.response);
+    fun();
+  });
+
+  // xhr.addEventListener('error', (error) => {
+  //   console.log('Unexpected error. Please try again later.');
+  // });
+
+  xhr.open('GET', 'https://supersimplebackend.dev/cart');
+  xhr.send();
+}
